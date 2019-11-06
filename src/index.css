@@ -5,9 +5,24 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  
+}
+
+.App {
+  height: 100vh;
+  width: 100%;
+  background-image: linear-gradient(to top right, rgba(84, 243, 32, 0.2), rgba(177, 12, 232, 0.3)), url('./assets/background.jpg');
+  background-size: cover;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+
