@@ -16,24 +16,57 @@ class Calculator extends Component {
         super(props);
 
         this.state = {
-            equation: '2*5',
-            result: 10
+            equation: '',
+            result: 0
         }
     }
 
     /* Function that is called when any of the keypad buttons are pressed */
     onButtonPress = (event) => {
-        console.log("onButtonPress called");
+        let equation = this.state.equation;
+        const pressedButtonValue = event.target.innerHTML;
+
+        console.log(pressedButtonValue);
+
+        if (pressedButtonValue === 'C') {
+            this.clear();
+            return;
+        } else if ((pressedButtonValue >= '' && pressedButtonValue <= '9') || pressedButtonValue === '.') {
+            /* If the user has pressed the button with a value between 0 and 9 or th eperiod, add that value to the equation */
+                equation += pressedButtonValue;
+        } else if (['+', '-', '*', '/', '%'].indexOf(pressedButtonValue) !== -1) {
+            /* If the user has pressed a button with the value of an operator, add the operator to the equation with a space on either side */
+            equation += ' ' + pressedButtonValue + ' ';
+        } else if (pressedButtonValue === '=') {
+            try {
+                const evalResult = eval(equation);
+                const result = Number.isInteger(evalResult) ? evalResult : evalResult.toFixed(2);
+                this.setState({result});
+            } catch (error) {   
+                console.log(error);
+                alert("an error occured. Check to make sure your equation is corect.");
+            }
+        } else {
+            equation = equation.trim();
+            equation = equation.substr(0, equation.length - 1);
+    }
+        /* Update our state with the new version of the equation */
+        this.setState({ equation });
+    }
+
+    clear() {
+        this.setState({ equation: '', result: 0});
     }
 
     render() {
         return (
             <div className="Calculator">
                 <Screen equation={this.state.equation} result={this.state.result} />
-                <Keypad onButtonPress={this.onButtonPress()} />
+                <Keypad onButtonPress={this.onButtonPress} />
             </div>
         );
     }
 }
 
 export default Calculator;
+

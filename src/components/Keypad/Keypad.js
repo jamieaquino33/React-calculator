@@ -24,7 +24,7 @@ class Keypad extends Component {
                     <Button onButtonPress={this.props.onButtonPress}>*</Button>
 
                 </KeypadRow>
- onButtonPress={this.props.onButtonPress}
+ 
                 {/*Row 3 */}
                 <KeypadRow>
                 <Button onButtonPress={this.props.onButtonPress}>4</Button>
